@@ -20,9 +20,15 @@ namespace GUI_20212202_JPV4PC
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        string name;
+        string lvl;
+        string carColor;
+        public MainWindow(string name, string lvl, string color)
         {
             InitializeComponent();
+            this.name = name;
+            this.lvl = lvl;
+            this.carColor = color;
         }
     }
 }
