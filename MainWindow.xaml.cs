@@ -70,5 +70,21 @@ namespace GUI_20212202_JPV4PC
 
             logic.SetupSizes(new System.Drawing.Size((int)grid.ActualWidth, (int)grid.ActualHeight));
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Left)
+            {
+                logic.Control(GameLogic.Controls.Left);
+            }
+            else if (e.Key == Key.Right)
+            {
+                logic.Control(GameLogic.Controls.Right);
+            }
+            else if (e.Key == Key.Space)
+            {
+                logic.Control(GameLogic.Controls.Shoot);
+            }
+        }
     }
 }

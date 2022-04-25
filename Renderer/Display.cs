@@ -42,6 +42,24 @@ namespace GUI_20212202_JPV4PC.Renderer
                 return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "BlueCar.png"), UriKind.RelativeOrAbsolute)));
             }
         }
+        public Brush PlayerCarBrush
+        {
+            get
+            {
+                if (model.Color == "Yellow")
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "YellowCar.png"), UriKind.RelativeOrAbsolute)));
+                }
+                else if (model.Color == "Green")
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "GreenCar.png"), UriKind.RelativeOrAbsolute)));
+                }
+                else
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "RedCar.png"), UriKind.RelativeOrAbsolute)));
+                }
+            }
+        }
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -52,6 +70,10 @@ namespace GUI_20212202_JPV4PC.Renderer
                 {
                     drawingContext.DrawRectangle(Brushes.White, null, new Rect(item.Center.X, item.Center.Y, 20, 100));
                 }
+
+                drawingContext.PushTransform(new TranslateTransform(model.Distance, 0));
+                drawingContext.DrawRectangle(PlayerCarBrush, null, new Rect(area.Width / 2 - 50, area.Height - 110, model.PlayerCarWidth, model.PlayerCarHeight));
+                drawingContext.Pop();
 
                 foreach (var item in model.Cars)
                 {
