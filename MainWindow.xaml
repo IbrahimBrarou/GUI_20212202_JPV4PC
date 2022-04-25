@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GUI_20212202_JPV4PC"
         xmlns:renderer="clr-namespace:GUI_20212202_JPV4PC.Renderer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Game" Height="700" Width="500" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
     <Grid x:Name="grid">
         <renderer:Display x:Name="display"/>
     </Grid>

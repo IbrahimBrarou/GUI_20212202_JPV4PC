@@ -8,5 +8,10 @@ namespace GUI_20212202_JPV4PC.Logic
 {
     internal interface IGameModel
     {
+        List<RoadMark> RoadMarks { get; set; }
+        string Name { get; set; }
+        string Color { get; set; }
+        event EventHandler Changed;
+
     }
 }
