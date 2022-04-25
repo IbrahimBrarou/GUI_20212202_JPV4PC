@@ -13,12 +13,29 @@ namespace GUI_20212202_JPV4PC.Logic
         public string Name { get; set; }
         public string Color { get; set; }
         public event EventHandler Changed;
+        public List<Car> Cars { get; set; }
+
         public void SetupSizes(System.Drawing.Size area)
         {
             this.area = area;
+            Cars = new List<Car>();
             RoadMarks = new List<RoadMark>();
             RoadMarks.Add(new RoadMark(new System.Drawing.Point(area.Width / 2, 0),
                 new System.Windows.Vector(0, 60)));
+            if (area.Width > 500)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Cars.Add(new Car(new System.Windows.Size(area.Width, area.Height)));
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Cars.Add(new Car(new System.Windows.Size(area.Width, area.Height)));
+                }
+            }
         }
         public GameLogic(string name, string Color)
         {
@@ -37,7 +54,24 @@ namespace GUI_20212202_JPV4PC.Logic
                 new System.Windows.Vector(0, 60)));
                 }
             }
-            Changed?.Invoke(this, null);
+
+            for (int i = 0; i < Cars.Count; i++)
+            {
+                bool inside = Cars[i].Move(new System.Drawing.Size((int)area.Width, (int)area.Height));
+                if (!inside)
+                {
+                    Cars.RemoveAt(i);
+                    Cars.Add(new Car(new System.Windows.Size(area.Width, area.Height)));
+
+                    foreach (var item in Cars)
+                    {
+                        item.Speed = new System.Windows.Vector(0, 40);
+                    }
+
+
+                }
+                Changed?.Invoke(this, null);
+            }
         }
     }
 }

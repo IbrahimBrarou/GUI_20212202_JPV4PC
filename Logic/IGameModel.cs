@@ -12,6 +12,7 @@ namespace GUI_20212202_JPV4PC.Logic
         string Name { get; set; }
         string Color { get; set; }
         event EventHandler Changed;
+        List<Car> Cars { get; set; }
 
     }
 }

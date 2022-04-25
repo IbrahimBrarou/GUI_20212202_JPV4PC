@@ -1,11 +1,13 @@
 ﻿using GUI_20212202_JPV4PC.Logic;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace GUI_20212202_JPV4PC.Renderer
 {
@@ -32,6 +34,14 @@ namespace GUI_20212202_JPV4PC.Renderer
 
             }
         }
+        public Brush CarBrush
+        {
+            get
+            {
+
+                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "BlueCar.png"), UriKind.RelativeOrAbsolute)));
+            }
+        }
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -42,6 +52,16 @@ namespace GUI_20212202_JPV4PC.Renderer
                 {
                     drawingContext.DrawRectangle(Brushes.White, null, new Rect(item.Center.X, item.Center.Y, 20, 100));
                 }
+
+                foreach (var item in model.Cars)
+                {
+                    drawingContext.DrawRectangle(CarBrush, null, new Rect(item.Center.X, item.Center.Y, 100, 130));
+                }
+
+
+
+
+
             }
         }
 
