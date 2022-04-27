@@ -69,6 +69,14 @@ namespace GUI_20212202_JPV4PC.Renderer
                 return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Dollar Coin.png"), UriKind.RelativeOrAbsolute)));
             }
         }
+        public Brush BulletBrush
+        {
+            get
+            {
+
+                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Bullet.png"), UriKind.RelativeOrAbsolute)));
+            }
+        }
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -99,10 +107,18 @@ namespace GUI_20212202_JPV4PC.Renderer
                 {
                     drawingContext.DrawText(new FormattedText("Coin Timer :" + model.CoinTimer, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 22, Brushes.White, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(area.Width - 200, 0));
                 }
+                if (model.BulletCounter > 0)
+                {
+                    drawingContext.DrawText(new FormattedText("Bullets :" + model.BulletCounter, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 22, Brushes.White, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(0, 50));
+                }
 
                 foreach (var item in model.Coins)
                 {
                     drawingContext.DrawRectangle(CoinBrush, null, new Rect(item.Center.X, item.Center.Y, 30, 30));
+                }
+                foreach (var item in model.Bullets)
+                {
+                    drawingContext.DrawRectangle(BulletBrush, null, new Rect(item.Center.X, item.Center.Y, 40, 40));
                 }
 
 
