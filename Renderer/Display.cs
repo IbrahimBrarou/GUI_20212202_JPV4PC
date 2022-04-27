@@ -1,6 +1,7 @@
 ﻿using GUI_20212202_JPV4PC.Logic;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -60,12 +61,27 @@ namespace GUI_20212202_JPV4PC.Renderer
                 }
             }
         }
+        public Brush CoinBrush
+        {
+            get
+            {
+
+                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Dollar Coin.png"), UriKind.RelativeOrAbsolute)));
+            }
+        }
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
             if (area.Width > 0 && area.Height > 0 && model != null)
             {
-                drawingContext.DrawRectangle(RoadBrush, null, new Rect(0, 0, area.Width, area.Height));
+                if (model.vanCoin == true)
+                {
+                    drawingContext.DrawRectangle(Brushes.Gray, null, new Rect(0, 0, area.Width, area.Height));
+                }
+                else
+                {
+                    drawingContext.DrawRectangle(RoadBrush, null, new Rect(0, 0, area.Width, area.Height));
+                }
                 foreach (var item in model.RoadMarks)
                 {
                     drawingContext.DrawRectangle(Brushes.White, null, new Rect(item.Center.X, item.Center.Y, 20, 100));
@@ -79,9 +95,15 @@ namespace GUI_20212202_JPV4PC.Renderer
                 {
                     drawingContext.DrawRectangle(CarBrush, null, new Rect(item.Center.X, item.Center.Y, 100, 130));
                 }
+                if (model.vanCoin)
+                {
+                    drawingContext.DrawText(new FormattedText("Coin Timer :" + model.CoinTimer, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 22, Brushes.White, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(area.Width - 200, 0));
+                }
 
-
-
+                foreach (var item in model.Coins)
+                {
+                    drawingContext.DrawRectangle(CoinBrush, null, new Rect(item.Center.X, item.Center.Y, 30, 30));
+                }
 
 
             }
