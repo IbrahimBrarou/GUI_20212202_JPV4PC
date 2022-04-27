@@ -140,6 +140,14 @@ namespace GUI_20212202_JPV4PC.Logic
                 new System.Windows.Vector(0, 60)));
                 }
             }
+            for (int i = 0; i < Bullets.Count; i++)
+            {
+                bool inside = Bullets[i].Move(area);
+                if (!inside)
+                {
+                    Bullets.RemoveAt(i);
+                }
+            }
 
             //Moving opposite cars
             for (int i = 0; i < Cars.Count; i++)
@@ -196,6 +204,43 @@ namespace GUI_20212202_JPV4PC.Logic
                     }
                 }
             }
+            // Bullets moving
+            for (int i = 0; i < Bullets.Count; i++)
+            {
+                bool inside = Bullets[i].Move(area);
+
+                if (!inside)
+                {
+                    Bullets.RemoveAt(i);
+                }
+                else
+                {
+                    Rect BulletRect = new Rect(Bullets[i].Center.X, Bullets[i].Center.Y, 60, 100);
+                    Rect PlayerRect = new Rect((area.Width / 2 - 50) + (int)(Distance), area.Height - 110, 100, 100);
+                    if (BulletRect.IntersectsWith(PlayerRect))
+                    {
+                        Bullets.RemoveAt(i);
+                        BulletCounter += 10;
+                    }
+                }
+            }
+
+            //coins creation
+            int r = Randomizer(0, 100);
+            if (r < 2)
+            {
+                Coins.Add(new Coin(new System.Drawing.Point(Randomizer(20, area.Width - 20), 0), new System.Windows.Vector(0, 20)));
+            }
+
+            //  Bullets creation
+            int r3 = Randomizer(0, 100);
+            if (r3 < 4)
+            {
+                Bullets.Add(new Bullet(new System.Drawing.Point(Randomizer(20, area.Width - 20), 0), new System.Windows.Vector(0, 20)));
+            }
+
+            
+
             Changed?.Invoke(this, null);
         }
     }
