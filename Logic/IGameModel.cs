@@ -16,5 +16,11 @@ namespace GUI_20212202_JPV4PC.Logic
         List<Car> Cars { get; set; }
         int PlayerCarWidth { get; set; }
         int PlayerCarHeight { get; set; }
+
+        //Coin feature
+        List<Coin> Coins { get; set; }
+        int CoinTimer { get; set; }
+        bool vanCoin { get; set; }
+
     }
 }
