@@ -24,6 +24,11 @@ namespace GUI_20212202_JPV4PC.Logic
         public int CoinTimer { get; set; }
         public bool vanCoin { get; set; }
 
+        // Bullet feature 
+        public List<Bullet> Bullets { get; set; }
+        public int BulletCounter { get; set; }
+
+
         public void SetupSizes(System.Drawing.Size area)
         {
             this.area = area;
@@ -36,6 +41,9 @@ namespace GUI_20212202_JPV4PC.Logic
             Coins = new List<Coin>();
             CoinTimer = 0;
             vanCoin = false;
+
+            Bullets = new List<Bullet>();
+            BulletCounter = 0;
 
             if (area.Width > 500)
             {
@@ -55,6 +63,9 @@ namespace GUI_20212202_JPV4PC.Logic
                 new System.Windows.Vector(0, 60)));
 
             Coins.Add(new Coin(new System.Drawing.Point(Randomizer(20, area.Width - 20), 0),
+                new System.Windows.Vector(0, 50)));
+
+            Bullets.Add(new Bullet(new System.Drawing.Point(Randomizer(20, area.Width - 20), 0),
                 new System.Windows.Vector(0, 50)));
         }
         public GameLogic(string name, string Color)
@@ -106,7 +117,7 @@ namespace GUI_20212202_JPV4PC.Logic
 
         private void NewShoot()
         {
-
+            
         }
         public void TimeStep()
         {

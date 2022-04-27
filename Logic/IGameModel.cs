@@ -22,5 +22,10 @@ namespace GUI_20212202_JPV4PC.Logic
         int CoinTimer { get; set; }
         bool vanCoin { get; set; }
 
+        //Bullet feature
+        List<Bullet> Bullets { get; set; }
+        int BulletCounter { get; set; }
+
+
     }
 }
