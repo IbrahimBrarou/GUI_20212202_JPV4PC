@@ -31,10 +31,11 @@ namespace GUI_20212202_JPV4PC.Logic
         int ProteinTimer { get; set; }
         bool vanProtein { get; set; }
 
-
-
         //Laser feature 
         List<Laser> Lasers { get; set; }
+
+        //Score feature
+        double Score { get; set; }
 
     }
 }

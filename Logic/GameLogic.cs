@@ -36,6 +36,9 @@ namespace GUI_20212202_JPV4PC.Logic
         //Laser feature
         public List<Laser> Lasers { get; set; }
 
+        //Score feature
+        public double Score { get; set; }
+
         public void SetupSizes(System.Drawing.Size area)
         {
             this.area = area;
@@ -58,6 +61,8 @@ namespace GUI_20212202_JPV4PC.Logic
             vanProtein = false;
 
             Lasers = new List<Laser>();
+
+            Score = 0;
 
             if (area.Width > 500)
             {
@@ -163,6 +168,9 @@ namespace GUI_20212202_JPV4PC.Logic
                 PlayerCarHeight = 100;
                 PlayerCarWidth = 100;
             }
+
+            Score = Math.Round(Score + 0.1, 2);
+
             for (int i = 0; i < Lasers.Count; i++)
             {
                 bool inside = Lasers[i].Move(area);

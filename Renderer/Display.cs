@@ -124,6 +124,9 @@ namespace GUI_20212202_JPV4PC.Renderer
                 {
                     drawingContext.DrawRectangle(CarBrush, null, new Rect(item.Center.X, item.Center.Y, 100, 130));
                 }
+
+                drawingContext.DrawText(new FormattedText(model.Name + "'s Score : " + model.Score.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 22, Brushes.White, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(0, 0));
+
                 if (model.vanCoin)
                 {
                     drawingContext.DrawText(new FormattedText("Coin Timer :" + model.CoinTimer, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 22, Brushes.White, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(area.Width - 200, 0));
