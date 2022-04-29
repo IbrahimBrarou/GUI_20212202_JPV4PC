@@ -26,6 +26,10 @@ namespace GUI_20212202_JPV4PC.Logic
         List<Bullet> Bullets { get; set; }
         int BulletCounter { get; set; }
 
+        //Protein feature
+        List<Protein> Proteins { get; set; }
+        int ProteinTimer { get; set; }
+        bool vanProtein { get; set; }
 
     }
 }

@@ -28,6 +28,10 @@ namespace GUI_20212202_JPV4PC.Logic
         public List<Bullet> Bullets { get; set; }
         public int BulletCounter { get; set; }
 
+        //Protein feature
+        public List<Protein> Proteins { get; set; }
+        public int ProteinTimer { get; set; }
+        public bool vanProtein { get; set; }
 
         public void SetupSizes(System.Drawing.Size area)
         {
@@ -44,6 +48,11 @@ namespace GUI_20212202_JPV4PC.Logic
 
             Bullets = new List<Bullet>();
             BulletCounter = 0;
+
+
+            Proteins = new List<Protein>();
+            ProteinTimer = 0;
+            vanProtein = false;
 
             if (area.Width > 500)
             {
@@ -66,6 +75,8 @@ namespace GUI_20212202_JPV4PC.Logic
                 new System.Windows.Vector(0, 50)));
 
             Bullets.Add(new Bullet(new System.Drawing.Point(Randomizer(20, area.Width - 20), 0),
+                new System.Windows.Vector(0, 50)));
+            Proteins.Add(new Protein(new System.Drawing.Point(Randomizer(20, area.Width - 20), 0),
                 new System.Windows.Vector(0, 50)));
         }
         public GameLogic(string name, string Color)
@@ -128,6 +139,19 @@ namespace GUI_20212202_JPV4PC.Logic
             else
             {
                 vanCoin = false;
+            }
+
+            if (ProteinTimer > 0 && vanProtein)
+            {
+                ProteinTimer--;
+                PlayerCarHeight = 200;
+                PlayerCarWidth = 200;
+            }
+            else
+            {
+                vanProtein = false;
+                PlayerCarHeight = 100;
+                PlayerCarWidth = 100;
             }
 
             for (int i = 0; i < RoadMarks.Count; i++)
@@ -224,7 +248,30 @@ namespace GUI_20212202_JPV4PC.Logic
                     }
                 }
             }
+            //protein
+            for (int i = 0; i < Proteins.Count; i++)
+            {
+                bool inside = Proteins[i].Move(area);
 
+                if (!inside)
+                {
+                    Proteins.RemoveAt(i);
+                }
+                else
+                {
+                    Rect ProteinRect = new Rect(Proteins[i].Center.X, Proteins[i].Center.Y, 60, 100);
+                    Rect PlayerRect = new Rect((area.Width / 2 - 50) + (int)(Distance), area.Height - 110, 100, 100);
+                    if (ProteinRect.IntersectsWith(PlayerRect))
+                    {
+                        Proteins.RemoveAt(i);
+                        vanProtein = true;
+                        ProteinTimer = Randomizer(10, 40);
+
+                    }
+
+
+                }
+            }
             //coins creation
             int r = Randomizer(0, 100);
             if (r < 2)
