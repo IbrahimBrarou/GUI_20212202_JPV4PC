@@ -33,6 +33,9 @@ namespace GUI_20212202_JPV4PC.Logic
         public int ProteinTimer { get; set; }
         public bool vanProtein { get; set; }
 
+        //Laser feature
+        public List<Laser> Lasers { get; set; }
+
         public void SetupSizes(System.Drawing.Size area)
         {
             this.area = area;
@@ -53,6 +56,8 @@ namespace GUI_20212202_JPV4PC.Logic
             Proteins = new List<Protein>();
             ProteinTimer = 0;
             vanProtein = false;
+
+            Lasers = new List<Laser>();
 
             if (area.Width > 500)
             {
@@ -128,7 +133,12 @@ namespace GUI_20212202_JPV4PC.Logic
 
         private void NewShoot()
         {
-            
+            if (BulletCounter > 0)
+            {
+                Lasers.Add(new Laser(new System.Drawing.Point(area.Width / 2 + (int)Distance, area.Height - 70),
+                new System.Windows.Vector(0, -120)));
+                BulletCounter--;
+            }
         }
         public void TimeStep()
         {
@@ -152,6 +162,14 @@ namespace GUI_20212202_JPV4PC.Logic
                 vanProtein = false;
                 PlayerCarHeight = 100;
                 PlayerCarWidth = 100;
+            }
+            for (int i = 0; i < Lasers.Count; i++)
+            {
+                bool inside = Lasers[i].Move(area);
+                if (!inside)
+                {
+                    Lasers.RemoveAt(i);
+                }
             }
 
             for (int i = 0; i < RoadMarks.Count; i++)
@@ -202,6 +220,24 @@ namespace GUI_20212202_JPV4PC.Logic
                         Cars.Clear();
 
 
+                    }
+
+                    for (int j = 0; j < Lasers.Count; j++)
+                    {
+                        Rect laserRect = new Rect(Lasers[j].Center.X, Lasers[j].Center.Y, 40, 40);
+                        if (laserRect.IntersectsWith(CarRect))
+                        {
+                            Cars.RemoveAt(j);
+                            Cars.Add(new Car(new System.Windows.Size(area.Width, area.Height)));
+                            if (vanCoin == true)
+                            {
+                                foreach (var item in Cars)
+                                {
+                                    item.Speed = new System.Windows.Vector(0, 40);
+                                }
+                            }
+                            Lasers.Remove(Lasers[j]);
+                        }
                     }
                 }
 

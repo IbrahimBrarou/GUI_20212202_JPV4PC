@@ -77,6 +77,14 @@ namespace GUI_20212202_JPV4PC.Renderer
                 return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Bullet.png"), UriKind.RelativeOrAbsolute)));
             }
         }
+        public Brush FlameBrush
+        {
+            get
+            {
+
+                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "flame.png"), UriKind.RelativeOrAbsolute)));
+            }
+        }
         public Brush ProteinBrush
         {
             get
@@ -106,6 +114,11 @@ namespace GUI_20212202_JPV4PC.Renderer
                 drawingContext.PushTransform(new TranslateTransform(model.Distance, 0));
                 drawingContext.DrawRectangle(PlayerCarBrush, null, new Rect(area.Width / 2 - 50, area.Height - 110, model.PlayerCarWidth, model.PlayerCarHeight));
                 drawingContext.Pop();
+
+                foreach (var item in model.Lasers)
+                {
+                    drawingContext.DrawRectangle(FlameBrush, null, new Rect(item.Center.X, item.Center.Y, 30, 30));
+                }
 
                 foreach (var item in model.Cars)
                 {
