@@ -115,6 +115,10 @@ namespace GUI_20212202_JPV4PC.Renderer
                 {
                     drawingContext.DrawText(new FormattedText("Coin Timer :" + model.CoinTimer, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 22, Brushes.White, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(area.Width - 200, 0));
                 }
+                if (model.vanProtein)
+                {
+                    drawingContext.DrawText(new FormattedText("Protein Timer :" + model.ProteinTimer, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 22, Brushes.White, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(area.Width - 200, 50));
+                }
                 if (model.BulletCounter > 0)
                 {
                     drawingContext.DrawText(new FormattedText("Bullets :" + model.BulletCounter, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 22, Brushes.White, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(0, 50));
@@ -128,7 +132,10 @@ namespace GUI_20212202_JPV4PC.Renderer
                 {
                     drawingContext.DrawRectangle(BulletBrush, null, new Rect(item.Center.X, item.Center.Y, 40, 40));
                 }
-
+                foreach (var item in model.Proteins)
+                {
+                    drawingContext.DrawRectangle(ProteinBrush, null, new Rect(item.Center.X, item.Center.Y, 40, 40));
+                }
 
             }
         }
