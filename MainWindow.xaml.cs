@@ -34,7 +34,7 @@ namespace GUI_20212202_JPV4PC
             this.carColor = color;
             logic = new GameLogic(name, color);
             display.SetupModel(logic);
-
+            logic.GameOver += Logic_GameOver;
             DispatcherTimer dt = new DispatcherTimer();
 
             if (lvl == "Easy")
@@ -70,7 +70,15 @@ namespace GUI_20212202_JPV4PC
 
             logic.SetupSizes(new System.Drawing.Size((int)grid.ActualWidth, (int)grid.ActualHeight));
         }
+        private void Logic_GameOver(object? sender, EventArgs e)
+        {
+            double scor = logic.Score;
 
+            new GameOverPage(scor, name).Show();
+            this.Close();
+
+
+        }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Left)

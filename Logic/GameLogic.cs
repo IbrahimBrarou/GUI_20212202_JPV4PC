@@ -39,6 +39,9 @@ namespace GUI_20212202_JPV4PC.Logic
         //Score feature
         public double Score { get; set; }
 
+        //Game over event 
+        public event EventHandler GameOver;
+
         public void SetupSizes(System.Drawing.Size area)
         {
             this.area = area;
@@ -226,6 +229,7 @@ namespace GUI_20212202_JPV4PC.Logic
                         Cars.RemoveAt(i);
                         Cars.Add(new Car(new System.Windows.Size(area.Width, area.Height)));
                         Cars.Clear();
+                        GameOver?.Invoke(this, null);
 
 
                     }
