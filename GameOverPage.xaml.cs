@@ -19,9 +19,41 @@ namespace GUI_20212202_JPV4PC
     /// </summary>
     public partial class GameOverPage : Window
     {
-        public GameOverPage()
+        public string name;
+        public double score;
+        public GameOverPage(double score, string name)
         {
             InitializeComponent();
+            this.score = score;
+            this.name = name;
+            this.DataContext = new playerrr
+            {
+                Name = name,
+                Score = score
+            };
+
+        }
+        private void Replay(object sender, RoutedEventArgs e)
+        {
+            new StartPage().Show();
+            this.Close();
+        }
+    }
+    public class playerrr
+    {
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        private double score;
+
+        public double Score
+        {
+            get { return score; }
+            set { score = value; }
         }
     }
 }
