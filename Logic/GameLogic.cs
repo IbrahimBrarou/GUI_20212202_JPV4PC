@@ -322,9 +322,16 @@ namespace GUI_20212202_JPV4PC.Logic
             }
             //coins creation
             int r = Randomizer(0, 100);
-            if (r < 2)
+            if (r < 3)
             {
                 Coins.Add(new Coin(new System.Drawing.Point(Randomizer(20, area.Width - 20), 0), new System.Windows.Vector(0, 20)));
+            }
+            
+            // protein creation
+            int r2 = Randomizer(0, 100);
+            if (r2 < 2)
+            {
+                Proteins.Add(new Protein(new System.Drawing.Point(Randomizer(20, area.Width - 20), 0), new System.Windows.Vector(0, 20)));
             }
 
             //  Bullets creation
